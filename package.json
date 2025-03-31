@@ -24,6 +24,7 @@
     "framer-motion": "^12.4.3",
     "lucide-react": "^0.475.0",
     "mathjs": "^14.2.0",
+    "nodemon": "^3.1.9",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.4",
     "react-chartjs-2": "^5.2.0",
@@ -68,5 +69,10 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.3"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
