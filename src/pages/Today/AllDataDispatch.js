@@ -243,8 +243,8 @@ const AllDataDispatch = () => {
           <TableHead></TableHead>
           <TableHead></TableHead>
           <TableHead></TableHead>
-          <TableHead>Pouch</TableHead>
-          <TableHead>Item (Kg)</TableHead>
+          <TableHead>Leakage</TableHead>
+          <TableHead>X-Ray</TableHead>
           <TableHead></TableHead>
           <TableHead></TableHead>
           <TableHead></TableHead>
@@ -264,6 +264,7 @@ const AllDataDispatch = () => {
             <TableCell>{row.pouchPacked}</TableCell>
             <TableCell>{row.leaked}</TableCell>
             <TableCell>{row.foreignMatter}</TableCell>
+            <TableCell>{row.box}</TableCell>
             <TableCell>{row.workersQuantity}</TableCell>
             <TableCell><CheckCheck className='h-6 w-6 mx-auto' color='#13c952'/></TableCell>
             <TableCell><Trash2 className='h-6 w-6' color="#e01010" onClick={()=>deleteRow(i)}/></TableCell>
