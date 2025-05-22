@@ -76,7 +76,7 @@ const AllDataFilling = () => {
     getCategories();
     getProducts();
 
-  }, [userinfo.token]);
+  });
 
   const val = 2;
 

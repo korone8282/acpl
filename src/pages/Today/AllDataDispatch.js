@@ -78,7 +78,7 @@ const AllDataDispatch = () => {
     getCategories();
     getProducts();
 
-  }, [userinfo.token]);
+  });
 
   const val = 0;
 
