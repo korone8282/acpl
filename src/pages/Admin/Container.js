@@ -128,7 +128,7 @@ async function deleteExport(){
     
 
 {
-    arr?.list.map((val,ind)=>(
+  arr && arr.list &&  arr.list.map((val,ind)=>(
 
     <TableBody>
 
