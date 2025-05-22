@@ -63,7 +63,7 @@ const AllDataDispatch = () => {
         try {
         setLoading(1);
         
-        const res = await apiConnector(`${EXPORT_URL}/list`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
+        const res = await apiConnector(`${EXPORT_URL}/list`,"GET");
         setArr(res.data.data);
 
         setLoading(0);
@@ -78,7 +78,7 @@ const AllDataDispatch = () => {
     getCategories();
     getProducts();
 
-  });
+  }, []);
 
   const val = 0;
 

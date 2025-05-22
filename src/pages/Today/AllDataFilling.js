@@ -61,7 +61,7 @@ const AllDataFilling = () => {
         try {
         setLoading(1);
         
-        const res = await apiConnector(`${EXPORT_URL}/list`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
+        const res = await apiConnector(`${EXPORT_URL}/list`,"GET");
         setArr(res.data.data);
 
         setLoading(0);
@@ -76,7 +76,7 @@ const AllDataFilling = () => {
     getCategories();
     getProducts();
 
-  });
+  }, []);
 
   const val = 2;
 
