@@ -32,8 +32,6 @@ const AllDataDispatch = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userinfo = useSelector(state=>state.user);
-
   const [categories, setcategories] = useState([]); 
 
   useEffect(() => {
@@ -108,6 +106,8 @@ const AllDataDispatch = () => {
   leaked:"",
   foreignMatter:"",
   });
+
+  const {userinfo} = useSelector(state=>state.auth);
 
   const updater = async() =>{
     try {

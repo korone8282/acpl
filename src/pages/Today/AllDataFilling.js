@@ -16,8 +16,6 @@ const AllDataFilling = () => {
   
   const section = useLocation();
 
-  const userinfo = useSelector(state=>state.user);
-
   const [products, setproducts] = useState([]);
   const [buyer, setbuyer] = useState("");
   const [arr, setArr] = useState([]);
@@ -75,7 +73,6 @@ const AllDataFilling = () => {
     getData();
     getCategories();
     getProducts();
-
   }, []);
 
   const val = 2;
@@ -106,6 +103,8 @@ const AllDataFilling = () => {
   leaked:"",
   foreignMatter:"",
   });
+
+  const {userinfo} = useSelector(state=>state.auth);
 
   const updater = async() =>{
     try {
