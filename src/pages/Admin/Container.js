@@ -64,7 +64,7 @@ const Container = () => {
       getInfo();
       getData();
 
-}, [userinfo.token,exportId]);
+}, [userinfo.token,exportId,info]);
 
 async function deleteExport(){
   try {
