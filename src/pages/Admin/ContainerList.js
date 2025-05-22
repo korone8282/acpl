@@ -72,7 +72,7 @@ const ContainerList = () => {
                 {
                     loading ? (<Loader/>
                     ) : (
-                        <div className='flex flex-wrap gap-12 md:gap-16 my-16 mx-1'>
+                        <div className='flex flex-wrap gap-12 md:gap-16 my-16 mx-9'>
                             {
                                 arr.map((val,ind)=>(
                                     <div key={ind}
