@@ -6,12 +6,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader'
 import { toast } from 'react-toastify';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
-import { Input } from "../../components/Input";
 import PageTransition from '../PageTransition';
 
 const Container = () => {
 
   const {userinfo} = useSelector(state => state.auth);
+
+  const [info] = useState({
+    start:new Date(new Date().setDate(new Date().getDate() - 14)).toISOString().split('T')[0],
+    end: new Date().toISOString().split('T')[0],
+});
 
   const exportId = useLocation().pathname.split("/")[3];
   const navigate = useNavigate();
@@ -40,29 +44,27 @@ const Container = () => {
         }
       }
 
+      async function getInfo(){
+        try {
+        setError(0);
+        setLoading(1);
+        
+        const res = await apiConnector(`${EXPORT_URL}/read`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
+
+        setArray(res.data.data);
+      
+        setLoading(0);
+      
+        } catch (e) {
+          setError(1);
+          console.log(e);
+        }
+      }
+      
+      getInfo();
       getData();
+
 }, [userinfo.token,exportId]);
-
-async function getInfo(){
-  try {
-  setError(0);
-  setLoading(1);
-  
-  const res = await apiConnector(`${EXPORT_URL}/read`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
-  setArray(res.data.data);
-
-  setLoading(0);
-
-  } catch (e) {
-    setError(1);
-    console.log(e);
-  }
-}
-
-  const [info, setInfo] = useState({
-    start:"",
-    end:"",
-});
 
 async function deleteExport(){
   try {
@@ -79,21 +81,13 @@ async function deleteExport(){
   }
 }
 
-const inputHandler = async(e) =>{
-        setInfo((prevData) => ({
-          ...prevData,
-          [e.target.name]: e.target.value
-        }));
-      }
-
-
       return (
         <PageTransition>
            <div className="min-h-screen bg-background p-6">
           <div className="max-w-[100rem] mx-auto space-y-12 text-start">
     
     
-          <div className="flex flex-col justify-center items-center mb-6 md:flex-row md:justify-between">
+          <div className="flex flex-col gap-6 justify-center items-center mb-6 md:flex-row md:justify-between md:mx-12">
 
           <div className="flex items-center gap-4">
             <div className="bg-red-600 rounded-lg px-6 hover:border-black text-lg p-2.5 mx-2 my-3 cursor-pointer hover:bg-orange-500 hover:text-black"
@@ -102,27 +96,8 @@ const inputHandler = async(e) =>{
             </div>
 </div>
 
-              <div className="flex flex-col gap-4 md:flex-row md:gap-4 items-center">Start:
-                <Input
-                  type="date"
-                  name="start"
-                  onChange={ e => inputHandler(e) }
-                  className="bg-[#2A2A2A] border-none"
-                />
-                <Input
-                  type="date"
-                  name='end'
-                  onChange={ e => inputHandler(e) }
-                  className="bg-[#2A2A2A] border-none"
-                /> :End
-              </div>
+              <div className="flex justify-start text-2xl"> Container Name: {arr.name}</div>
 
-              <div className="flex items-center gap-4">
-            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-2.5 mx-2 my-3 cursor-pointer hover:bg-orange-500 hover:text-black"
-                 onClick={getInfo}>
-              <span>Submit</span>
-            </div>
-</div>
         </div>
     
 
@@ -143,7 +118,6 @@ const inputHandler = async(e) =>{
                     <TableHead>Product Name</TableHead>
                     <TableHead>Pack Size (kg)</TableHead>
                     <TableHead>Pouch Goal</TableHead>
-                    <TableHead>Production (kg)</TableHead>
                     <TableHead>Pouch Filled</TableHead>
                     <TableHead>Pouch Packed</TableHead>
                     <TableHead>Pouch Wasted (Dispatch)</TableHead>
@@ -152,25 +126,51 @@ const inputHandler = async(e) =>{
                   </TableRow>
                 </TableHeader>
     
-<TableBody>
+
 {
     arr?.list.map((val,ind)=>(
-      <TableRow key={ind} className={`${val.pouch - (array.filter( product => product.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)) >0 ? "bg-red-400" : "bg-green-900" }`}>
+
+    <TableBody>
+
+      <TableRow key={ind} className={`${val.pouch - (array.filter( product => product.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize && item.container === arr.name).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)) >= 0 ? "bg-red-600" : "bg-green-900" }`}>
         <TableCell>{ind+1} </TableCell>
         <TableCell>{val.buyerName} </TableCell>
         <TableCell>{val.productName} </TableCell>
         <TableCell>{val.packSize} </TableCell>
         <TableCell>{val.pouch} </TableCell>
-        <TableCell>{(array.filter( product => product.sectionMain === "Kitchen").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName).reduce( (accumulator, object) => accumulator + (object.yield*object.batchQuantity),0),0)).toFixed(2)} </TableCell>
-        <TableCell>{array.filter( product => product.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)} </TableCell>
-        <TableCell>{array.filter( product => product.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.pouchPacked,0),0)} </TableCell>
-        <TableCell>{array.filter( product => product.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.leaked,0),0)} </TableCell>
-        <TableCell>{val.pouch - (array.filter( product => product.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0))} </TableCell>
-        <TableCell>{val.pouch - (array.filter( product => product.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.pouchPacked,0),0) + array.filter( product => product.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.leaked,0),0))} </TableCell>
+        <TableCell>{array.filter( product => product.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize && item.container === arr.name).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)} </TableCell>
+        <TableCell>{array.filter( product => product.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize && item.container === arr.name).reduce( (accumulator, object) => accumulator + object.pouchPacked,0),0)} </TableCell>
+        <TableCell>{array.filter( product => product.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize && item.container === arr.name).reduce( (accumulator, object) => accumulator + object.leaked,0),0)} </TableCell>
+        <TableCell>{val.pouch - (array.filter( product => product.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize && item.container === arr.name).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0))} </TableCell>
+        <TableCell>{val.pouch - (array.filter( product => product.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize && item.container === arr.name).reduce( (accumulator, object) => accumulator + object.pouchPacked,0),0))} </TableCell>
       </TableRow>
+
+      {
+        array?.map((v)=>(
+          v.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize && item.container === arr.name).map((val,ind)=>(
+          <TableRow key={ind} className="bg-slate-800">
+            <TableCell>{v.createdAt.slice(5,10)}</TableCell>
+            <TableCell>{val.buyerName}</TableCell>
+            <TableCell>{val.productName}</TableCell>
+            <TableCell>{val.packSize}</TableCell>
+            <TableCell>{val.batch}</TableCell>
+            <TableCell>{val.pouchQuantity}</TableCell>
+            <TableCell>{val.pouchPacked}</TableCell>
+            <TableCell>{val.leaked}</TableCell>
+            <TableCell>-</TableCell>
+            <TableCell>-</TableCell>
+          </TableRow>
+
+          ))
+        ))
+      }
+      
+    </TableBody>
     ))
-  }
-</TableBody>
+}
+
+
+
               </Table>
             </div>
             )

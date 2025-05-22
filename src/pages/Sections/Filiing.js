@@ -89,6 +89,7 @@ const Filiing = () => {
             <TableHeader>
               <TableRow className="bg-muted/60">
                 <TableHead className="text-left">S No.</TableHead>
+                <TableHead>Container</TableHead>
                 <TableHead>Buyer Name</TableHead>
                 <TableHead>Product Name</TableHead>
                 <TableHead>Batch No.</TableHead>
@@ -99,6 +100,7 @@ const Filiing = () => {
                 <TableHead>Cost/Pouch</TableHead>
               </TableRow>
               <TableRow className="bg-muted/40">
+                <TableHead></TableHead>
                 <TableHead></TableHead>
                 <TableHead></TableHead>
                 <TableHead></TableHead>
@@ -119,6 +121,7 @@ const Filiing = () => {
                 sectionData[0]?.dataList.map((row,i) => (
                 <TableRow key={row.sNo} className="hover:bg-muted/50">
                   <TableCell>{i+1}</TableCell>
+                  <TableCell>{row.container}</TableCell>
                   <TableCell>{row.buyerName}</TableCell>
                   <TableCell>{row.productName}</TableCell>
                   <TableCell>{row.batch}</TableCell>
@@ -131,7 +134,7 @@ const Filiing = () => {
                 </TableRow>
               ))}
               <TableRow className="font-medium bg-muted/50">
-                <TableCell colSpan={5}>Total:</TableCell>
+                <TableCell colSpan={6}>Total:</TableCell>
                 <TableCell>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0)}</TableCell>
                 <TableCell>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0)}</TableCell>
                 <TableCell>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0)}</TableCell>

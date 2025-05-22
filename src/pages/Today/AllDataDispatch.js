@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { toast } from 'react-toastify';
-import { DATA_URL, CATEGORIES_URL, PRODUCT_URL } from '../../redux/Utils/constants';
+import { DATA_URL, CATEGORIES_URL, PRODUCT_URL, EXPORT_URL } from '../../redux/Utils/constants';
 import { setData, deleteData, emptyData } from '../../redux/Slices/localSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -24,6 +24,7 @@ const AllDataDispatch = () => {
 
   const [products, setproducts] = useState([]);
   const [buyer, setbuyer] = useState("");
+  const [arr, setArr] = useState([]);
   const [loading, setLoading] = useState(1);
 
   const currentSection = section.pathname.split("/")[2].split("-")[2];
@@ -56,6 +57,22 @@ const AllDataDispatch = () => {
       }
       }
 
+      async function getData(){
+        try {
+        setLoading(1);
+        
+        const res = await apiConnector(`${EXPORT_URL}/list`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
+        setArr(res.data.data);
+
+        setLoading(0);
+        
+
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+    getData();
     getCategories();
     getProducts();
 
@@ -68,6 +85,7 @@ const AllDataDispatch = () => {
   const [formData, setformData] = useState({
   section:"",
   batch:"",
+  container:"",
   buyer:"",
   buyerName:"",
   productName:"",
@@ -138,6 +156,7 @@ const AllDataDispatch = () => {
     
     setformData((prevData) => ({
         ...prevData,
+        container:"",
         buyer:"",
         buyerName:"",
         productName:"",
@@ -225,6 +244,7 @@ const AllDataDispatch = () => {
       <TableHeader>
         <TableRow className="bg-muted/60">
           <TableHead className="text-left">S No.</TableHead>
+          <TableHead>Container</TableHead>
           <TableHead>Buyer Name</TableHead>
           <TableHead>Product Name</TableHead>
           <TableHead>Batch No.</TableHead>
@@ -237,6 +257,7 @@ const AllDataDispatch = () => {
           <TableHead>Delete</TableHead>
         </TableRow>
         <TableRow className="bg-muted/40">
+          <TableHead></TableHead>
           <TableHead></TableHead>
           <TableHead></TableHead>
           <TableHead></TableHead>
@@ -257,6 +278,7 @@ const AllDataDispatch = () => {
           initalData[0]?.map((row,i) => (
           <TableRow key={i} className="hover:bg-muted/50">
             <TableCell>{i+1}</TableCell>
+            <TableCell>{row.container}</TableCell>
             <TableCell>{row.buyerName}</TableCell>
             <TableCell>{row.productName}</TableCell>
             <TableCell>{row.batch}</TableCell>
@@ -273,6 +295,19 @@ const AllDataDispatch = () => {
 
         <TableRow className="hover:bg-muted/50">
         <TableCell><CirclePlus className='h-5 w-5' color='#06a73f'/></TableCell>
+
+        <TableCell> <select
+             name='container'
+             className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+             value={formData.container}
+             onChange={ e => inputHandler(e) }
+    >
+    <option className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+    {
+        arr.map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={`${val.name}`} key={index}>{val.name}</option>))
+    }
+    </select> </TableCell>
+
             <TableCell> <select
              name='buyerName'
              className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"

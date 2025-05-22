@@ -42,9 +42,9 @@ const dataSchema = new mongoose.Schema({
             type: Number,
             default:0,
         },
-        yieldLoss:{
-            type: Number,
-            default:0,
+        container:{
+            type: String,
+            required : true,
         },
         workersQuantity:{
             type: Number,

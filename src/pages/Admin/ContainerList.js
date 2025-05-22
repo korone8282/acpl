@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { EXPORT_URL } from '../../redux/Utils/constants';
 import Loader from '../../components/Loader'
 import { useNavigate} from 'react-router-dom';
+import '../../components/TestTube.css';
 
 const ContainerList = () => {
 
@@ -12,6 +13,12 @@ const ContainerList = () => {
     const [loading, setLoading] = useState(1);
     const [error, setError] = useState(0);
     const [arr, setArr] = useState([]);
+    const [array, setArray] = useState([]);
+
+    const [info] = useState({
+      start:new Date(new Date().setDate(new Date().getDate() - 21)).toISOString().split('T')[0],
+      end: new Date().toISOString().split('T')[0],
+  });
 
     const navigate = useNavigate();
 
@@ -34,9 +41,28 @@ const ContainerList = () => {
             }
           }
 
+          async function getInfo(){
+            try {
+            setError(0);
+            setLoading(1);
+            
+            const res = await apiConnector(`${EXPORT_URL}/read`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
+    
+            setArray(res.data.data);
+          
+            setLoading(0);
+          
+            } catch (e) {
+              setError(1);
+              console.log(e);
+            }
+          }
+          
+          getInfo();
           getData();
-    }, [userinfo.token]);
 
+    }, [userinfo.token]);
+    
   return (
     <div>
       {
@@ -46,21 +72,27 @@ const ContainerList = () => {
                 {
                     loading ? (<Loader/>
                     ) : (
-                        <div className='flex flex-wrap gap-12 sm:max-lg:gap-9 my-4 mx-9'>
+                        <div className='flex flex-wrap gap-12 md:gap-16 my-16 mx-9'>
                             {
                                 arr.map((val,ind)=>(
                                     <div key={ind}
                                          onClick={()=>navigate(`${val._id}`)}
                                          >
                                  
-<div class="w-72 h-48 flex justify-center items-center relative hover:translate-y-2">
-
-  
-<div class="blur absolute inset-0 rounded-lg -translate-x-1 translate-y-1 bg-gradient-to-br from-cyan-500 to-violet-400"></div>
-
+<div className="w-72 h-48 flex justify-center my-8 items-center relative hover:translate-y-2 cursor-pointer">
     
-<div class="relative w-[98%] h-[96%] bg-black rounded-lg p-4">
-    <p class="ml-2 text-4xl text-primary p-3">{val.name}</p>
+<div className="tube bg-black rounded-lg">
+<div className="shine"></div>
+  <div className="body">
+    <div className="liquid max-h-[75%]" style={{height: `${(array.reduce((acc, obj) => acc + obj.dataList.filter(item => item.container === val.name).reduce((acc, obj) => acc + obj.pouchQuantity, 0), 0)/79200)*100}%`}}>
+      <div className="percentage"></div>
+    </div>
+  </div>
+    <p className="ml-2 text-4xl text-primary p-3">{val.name}</p>
+    <div className='text-black text-2xl font-bold left-[50%] translate-x-[-50%] z-10 absolute bottom-20'>{((array.reduce((acc, obj) => acc + obj.dataList.filter(item => item.container === val.name).reduce((acc, obj) => acc + obj.pouchQuantity, 0), 0)/79200)*100).toFixed(1)}%</div>
+    
+    <div className='text-black text-2xl font-bold left-[50%] translate-x-[-50%] z-10 absolute bottom-10'>{((array.reduce((acc, obj) => acc + obj.dataList.filter(item => item.container === val.name).reduce((acc, obj) => acc + obj.pouchPacked, 0), 0)/79200)*100).toFixed(1)}%</div>
+
 </div>
 
 </div>

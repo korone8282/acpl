@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { toast } from 'react-toastify';
-import { DATA_URL, CATEGORIES_URL, PRODUCT_URL } from '../../redux/Utils/constants';
+import { DATA_URL, CATEGORIES_URL, PRODUCT_URL, EXPORT_URL } from '../../redux/Utils/constants';
 import { setData, deleteData, emptyData } from '../../redux/Slices/localSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate} from 'react-router-dom';
@@ -18,6 +18,7 @@ const AllDataFilling = () => {
 
   const [products, setproducts] = useState([]);
   const [buyer, setbuyer] = useState("");
+  const [arr, setArr] = useState([]);
   const [loading, setLoading] = useState(1);
 
   const [isDayShift, setIsDayShift] = useState(true);
@@ -54,6 +55,22 @@ const AllDataFilling = () => {
       }
       }
 
+      async function getData(){
+        try {
+        setLoading(1);
+        
+        const res = await apiConnector(`${EXPORT_URL}/list`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
+        setArr(res.data.data);
+
+        setLoading(0);
+        
+
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+    getData();
     getCategories();
     getProducts();
   }, []);
@@ -65,6 +82,7 @@ const AllDataFilling = () => {
   const [formData, setformData] = useState({
   section:"",
   batch:"",
+  container:"",
   buyer:"",
   buyerName:"",
   productName:"",
@@ -136,6 +154,7 @@ const AllDataFilling = () => {
     
     setformData((prevData) => ({
       ...prevData,
+    container:"",
     buyer:"",
     buyerName:"",
     batch:"",
@@ -163,7 +182,6 @@ const AllDataFilling = () => {
     dispatch(deleteData({val,index}));  
   }
 
- 
   return (
     <div className="min-h-screen bg-background p-6">
 
@@ -225,6 +243,7 @@ const AllDataFilling = () => {
       <TableHeader>
         <TableRow className="bg-muted/60">
           <TableHead className="text-left">S No.</TableHead>
+          <TableHead>Container</TableHead>
           <TableHead>Buyer Name</TableHead>
           <TableHead>Product Name</TableHead>
           <TableHead>Batch No.</TableHead>
@@ -236,6 +255,7 @@ const AllDataFilling = () => {
           <TableHead>Delete</TableHead>
         </TableRow>
         <TableRow className="bg-muted/40">
+          <TableHead></TableHead>
           <TableHead></TableHead>
           <TableHead></TableHead>
           <TableHead></TableHead>
@@ -255,6 +275,7 @@ const AllDataFilling = () => {
           initalData[2]?.map((row,i) => (
           <TableRow key={i} className="hover:bg-muted/50">
             <TableCell>{i+1}</TableCell>
+            <TableCell>{row.container}</TableCell>
             <TableCell>{row.buyerName}</TableCell>
             <TableCell>{row.productName}</TableCell>
             <TableCell>{row.batch}</TableCell>
@@ -270,6 +291,18 @@ const AllDataFilling = () => {
 
         <TableRow className="hover:bg-muted/50">
         <TableCell><CirclePlus className='h-5 w-5' color='#06a73f'/></TableCell>
+        <TableCell> <select
+             name='container'
+             className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+             value={formData.container}
+             onChange={ e => inputHandler(e) }
+    >
+    <option className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+    {
+        arr.map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={`${val.name}`} key={index}>{val.name}</option>))
+    }
+    </select> </TableCell>
+
             <TableCell> <select
              name='buyerName'
              className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
