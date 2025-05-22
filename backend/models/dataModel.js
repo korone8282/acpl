@@ -44,7 +44,6 @@ const dataSchema = new mongoose.Schema({
         },
         container:{
             type: String,
-            required : true,
         },
         workersQuantity:{
             type: Number,
