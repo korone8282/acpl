@@ -63,7 +63,7 @@ const Monthly = () => {
 
   function myFunction(item) {
     let size = item;
-    sum += item*data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === size).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
+    sum += ((item+0.005)*data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === size).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0))
   }
 
   return (
