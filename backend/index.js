@@ -27,6 +27,9 @@ app.use(
 		credentials: true,
 	})
 ); 
+
+app.options('*', cors());
+
 app.use(express.urlencoded({ extended: true }));
 
 __dirname = path.resolve();
