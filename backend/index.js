@@ -22,6 +22,8 @@ app.use(express.json());
 app.use(
 	cors({
 		origin:'https://arthacuisine.netlify.app',
+		methods: ['GET', 'POST', 'PUT', 'DELETE'],
+		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true,
 	})
 );
