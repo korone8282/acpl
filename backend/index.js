@@ -26,7 +26,7 @@ app.use(
 		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true,
 	})
-);
+); 
 app.use(express.urlencoded({ extended: true }));
 
 __dirname = path.resolve();
