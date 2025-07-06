@@ -26,7 +26,7 @@ app.use(
 		credentials: true,
 	})
 );
-
+  
 app.get('/health', (req, res) => {
 	res.status(200).send('OK');
 });
@@ -37,7 +37,7 @@ setInterval(() => {
 	}).on('error', (err) => {
 	  console.error('Self-ping error:', err.message);
 	});
-  }, 600000);
+  }, 550000);
 
 app.use(express.urlencoded({ extended: true }));
 
