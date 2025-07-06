@@ -14,23 +14,30 @@ const exportRoutes = require('./routes/exportRoutes');
 const graphRoutes = require('./routes/graphRoutes');
 const cors = require('cors');
 const path = require('path');
+const http = require('http');
 dbConnect();
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({
-	origin: function(origin, callback) {
-	  if (!origin || origin === 'https://arthacuisine.netlify.app') {
-		callback(null, true);
-	  } else {
-		callback(new Error('Not allowed by CORS'));
-	  }
-	},
-	credentials: true,
-	methods: ['GET', 'POST','PUT', 'OPTIONS'], // Explicitly allow OPTIONS for preflight
-	allowedHeaders: ['Content-Type', 'Authorization']
-  }));
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+		credentials: true,
+	})
+);
+
+app.get('/health', (req, res) => {
+	res.status(200).send('OK');
+});
+
+setInterval(() => {
+	http.get('http://acpl-1.onrender.com/health', (res) => {
+	  res.on('data', () => {});
+	}).on('error', (err) => {
+	  console.error('Self-ping error:', err.message);
+	});
+  }, 600000);
 
 app.use(express.urlencoded({ extended: true }));
 
