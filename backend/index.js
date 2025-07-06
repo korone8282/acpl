@@ -19,12 +19,18 @@ dbConnect();
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(
-	cors({
-		origin:'https://arthacuisine.netlify.app',
-		credentials: true,
-	})
-); 
+app.use(cors({
+	origin: function(origin, callback) {
+	  if (!origin || origin === 'https://arthacuisine.netlify.app') {
+		callback(null, true);
+	  } else {
+		callback(new Error('Not allowed by CORS'));
+	  }
+	},
+	credentials: true,
+	methods: ['GET', 'POST', 'OPTIONS'], // Explicitly allow OPTIONS for preflight
+	allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 
 app.use(express.urlencoded({ extended: true }));
 
