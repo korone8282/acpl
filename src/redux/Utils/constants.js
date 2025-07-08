@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://your-site.netlify.app/.netlify/functions/'
+export const BASE_URL = 'https://arthacuisine.netlify.app/.netlify/functions/'
 
 export const LOGIN_API = 'https://acpl.onrender.com/api/users/login'
 export const REGISTER_API = 'https://acpl.onrender.com/api/users/signup'
@@ -11,13 +11,11 @@ export const OTPLOG_URL = 'https://acpl.onrender.com/api/users/otpLogin'
 export const GENOTP_URL = 'https://acpl.onrender.com/api/users/otpEntry'
 export const VERIFY_URL = 'https://acpl.onrender.com/users/verifyOtp'
 
-export const PROFILE_URL = 'https://acpl.onrender.com/api/users/profile'
-export const USERINFO_URL = 'https://acpl.onrender.com/api/users/getAllUsers'
-export const USERID_URL = 'https://acpl.onrender.com/api/users/'
+export const PROFILE_URL = 'https://arthacuisine.netlify.app/.netlify/functions/profile'
+export const USERINFO_URL = 'https://arthacuisine.netlify.app/.netlify/functions/getAllUsers'
+export const USERID_URL = 'https://arthacuisine.netlify.app/.netlify/functions/api/users/'
 
-export const UPLOAD_URL = 'https://acpl.onrender.com/api/uploads'
-
-export const CATEGORIES_URL = 'https://acpl.onrender.com/api/category'
+export const CATEGORIES_URL = 'https://your-site.netlify.app/.netlify/functions/category'
 
 export const PRODUCT_URL = 'https://acpl.onrender.com/api/product'
 
@@ -25,10 +23,8 @@ export const GOAL_URL = 'https://acpl.onrender.com/api/goal'
 
 export const DATA_URL = 'https://acpl.onrender.com/api/data'
 
-export const STORE_URL = 'https://acpl.onrender.com/api/inventory'
-
 export const DISPATCH_URL = 'https://acpl.onrender.com/api/dispatch'
 
 export const EXPORT_URL = 'https://acpl.onrender.com/api/export'
 
-export const GRAPH_URL = 'https://acpl.onrender.com/api/graph'
+export const GRAPH_URL = 'https://arthacuisine.netlify.app/.netlify/functions/graph'
