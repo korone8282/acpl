@@ -10,7 +10,7 @@
 
   [[redirects]]
   from = "/category/:id"
-  to = "/.netlify/functions/category"
+  to = "/.netlify/functions/category/:id"
   status = 200
   
   [[redirects]]
@@ -20,6 +20,6 @@
   
  [[redirects]]
   from = "/products/:id"
-  to = "/.netlify/functions/product"
+  to = "/.netlify/functions/product/:id"
   status = 200
   
