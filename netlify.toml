@@ -1,0 +1,115 @@
+[build]
+  command = "npm run build"  # Builds your React app
+  publish = "build"          # Output directory for React build
+  functions = "functions"    # Directory for Netlify Functions
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/auth/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/data/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/export/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/category/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/user/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/container/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  
+  [[redirects]]
+  from = "/graph/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/monthly-graph"
+  to = "/.netlify/functions/graph"
+  status = 200
+
+  [[redirects]]
+  from = "/graph/:month"
+  to = "/.netlify/functions/graph/:month"
+  status = 200
+
+  [[redirects]]
+  from = "/product/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/disp-product/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/pouches/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  
+  [[redirects]]
+  from = "/updater-one"
+  to = "/.netlify/functions/product"
+  status = 200
+
+  [[redirects]]
+  from = "/products"
+  to = "/.netlify/functions/product"
+  status = 200
+  
+  [[redirects]]
+  from = "/goal/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/goals/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/dispatch"
+  to = "/.netlify/functions/dispatch"
+  status = 200
+
+ [[redirects]]
+  from = "/packed"
+  to = "/.netlify/functions/dispatch"
+  status = 200
+
+  [[redirects]]
+  from = "/data/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/packed-report"
+  to = "/.netlify/functions/dispatch"
+  status = 200
+
+  [[redirects]]
+  from = "/dispatched-report"
+  to = "/.netlify/functions/dispatch"
+  status = 200
+

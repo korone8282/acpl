@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://acpl.onrender.com'
+export const BASE_URL = 'https://your-site.netlify.app/.netlify/functions/'
 
 export const LOGIN_API = 'https://acpl.onrender.com/api/users/login'
 export const REGISTER_API = 'https://acpl.onrender.com/api/users/signup'
