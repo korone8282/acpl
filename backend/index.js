@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
 	cors({
-		origin: "https://arthacuisine.netlify.app",
+		origin: "https://acpl-2.onrender.com",
 		credentials: true,
 	})
 );
