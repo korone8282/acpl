@@ -12,18 +12,8 @@
   status = 200
 
 [[redirects]]
-  from = "/category/*"
-  to = "/.netlify/functions/category/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/product"
+  from = "/products"
   to = "/.netlify/functions/product"
-  status = 200
-
-[[redirects]]
-  from = "/product/*"
-  to = "/.netlify/functions/product/:splat"
   status = 200
 
 [[redirects]]
@@ -32,18 +22,8 @@
   status = 200
 
 [[redirects]]
-  from = "/goal/*"
-  to = "/.netlify/functions/goal/:splat"
-  status = 200
-
-[[redirects]]
   from = "/data"
   to = "/.netlify/functions/data"
-  status = 200
-
-[[redirects]]
-  from = "/data/*"
-  to = "/.netlify/functions/data/:splat"
   status = 200
 
 [[redirects]]
@@ -52,37 +32,7 @@
   status = 200
 
 [[redirects]]
-  from = "/graph/*"
-  to = "/.netlify/functions/graph/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/monthly-graph"
-  to = "/.netlify/functions/graph"
-  status = 200
-
-[[redirects]]
-  from = "/graph/:month"
-  to = "/.netlify/functions/graph/:month"
-  status = 200
-
-[[redirects]]
   from = "/dispatch"
-  to = "/.netlify/functions/dispatch"
-  status = 200
-
-[[redirects]]
-  from = "/packed"
-  to = "/.netlify/functions/dispatch"
-  status = 200
-
-[[redirects]]
-  from = "/packed-report"
-  to = "/.netlify/functions/dispatch"
-  status = 200
-
-[[redirects]]
-  from = "/dispatched-report"
   to = "/.netlify/functions/dispatch"
   status = 200
 
@@ -92,31 +42,11 @@
   status = 200
 
 [[redirects]]
-  from = "/export/*"
-  to = "/.netlify/functions/export/:splat"
+  from = "/users"
+  to = "/.netlify/functions/users"
   status = 200
 
 [[redirects]]
-  from = "/products"
-  to = "/.netlify/functions/product"
-  status = 200
-
-[[redirects]]
-  from = "/updater-one"
-  to = "/.netlify/functions/product"
-  status = 200
-
-[[redirects]]
-  from = "/pouches/*"
-  to = "/.netlify/functions/product/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/disp-product/*"
-  to = "/.netlify/functions/product/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/goals/*"
-  to = "/.netlify/functions/goal/:splat"
+  from = "/users/login"
+  to = "/.netlify/functions/users"
   status = 200
