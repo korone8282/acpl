@@ -5,7 +5,7 @@ const { createProduct ,
         updateProduct,
         deleteProduct,
         productList,
-         readProduct, 
+        readProduct, 
         updateDispProduct,
         updatePouches,
         updaterOne} = require('../controllers/product');
