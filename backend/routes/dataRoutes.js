@@ -9,7 +9,7 @@ const { createData,
         readDvN,
         readKvF,
         ProductData,
-        readLeft} = require('../controllers/dailyData');
+        readLeft} = require('../controllers/data');
 
 router.post("/:string/:dayTime",createData);
 router.get("/List/:month",readMonthlyData); 

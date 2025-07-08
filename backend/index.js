@@ -1,7 +1,6 @@
 const express = require('express');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
-const dbConnect = require('./config/connectDB');
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -12,7 +11,6 @@ const exportRoutes = require('./routes/exportRoutes');
 const graphRoutes = require('./routes/graphRoutes');
 const cors = require('cors');
 const path = require('path');
-dbConnect();
 
 const app = express();
 app.use(cookieParser());

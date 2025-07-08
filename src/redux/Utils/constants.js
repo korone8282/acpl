@@ -23,6 +23,8 @@ export const GOAL_URL = 'https://acpl.onrender.com/api/goal'
 
 export const DATA_URL = 'https://acpl.onrender.com/api/data'
 
+export const UPLOAD_URL = 'https://acpl.onrender.com/api/upload'
+
 export const DISPATCH_URL = 'https://acpl.onrender.com/api/dispatch'
 
 export const EXPORT_URL = 'https://acpl.onrender.com/api/export'
