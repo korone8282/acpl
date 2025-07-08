@@ -3,11 +3,6 @@
   publish = "build"          # Output directory for React build
   functions = "functions"    # Directory for Netlify Functions
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-
   [[redirects]]
   from = "/auth/*"
   to = "/.netlify/functions/:splat"
@@ -25,7 +20,7 @@
 
   [[redirects]]
   from = "/category/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/category/:splat"
   status = 200
 
   [[redirects]]
@@ -113,3 +108,7 @@
   to = "/.netlify/functions/dispatch"
   status = 200
 
+ [[redirects]]
+  from = "/product/list"
+  to = "/.netlify/functions/product"
+  status = 200
