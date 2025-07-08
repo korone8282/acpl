@@ -15,7 +15,7 @@ export const PROFILE_URL = 'https://arthacuisine.netlify.app/.netlify/functions/
 export const USERINFO_URL = 'https://arthacuisine.netlify.app/.netlify/functions/getAllUsers'
 export const USERID_URL = 'https://arthacuisine.netlify.app/.netlify/functions/api/users/'
 
-export const CATEGORIES_URL = 'https://your-site.netlify.app/.netlify/functions/category'
+export const CATEGORIES_URL = 'https://arthacuisine.netlify.app/.netlify/functions/category'
 
 export const PRODUCT_URL = 'https://acpl.onrender.com/api/product'
 
