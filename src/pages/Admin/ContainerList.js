@@ -61,7 +61,7 @@ const ContainerList = () => {
           getInfo();
           getData();
 
-    }, [userinfo.token,info]);
+    }, [userinfo.token]);
     
   return (
     <div>
@@ -72,7 +72,7 @@ const ContainerList = () => {
                 {
                     loading ? (<Loader/>
                     ) : (
-                        <div className='flex flex-wrap gap-12 md:gap-16 my-16 mx-9'>
+                        <div className='flex flex-wrap gap-12 md:gap-16 my-16 mx-1'>
                             {
                                 arr.map((val,ind)=>(
                                     <div key={ind}

@@ -64,7 +64,7 @@ const Container = () => {
       getInfo();
       getData();
 
-}, [userinfo.token,exportId,info]);
+}, [userinfo.token,exportId]);
 
 async function deleteExport(){
   try {
@@ -128,7 +128,7 @@ async function deleteExport(){
     
 
 {
-  arr && arr.list &&  arr.list.map((val,ind)=>(
+   arr && arr.list && arr.list.map((val,ind)=>(
 
     <TableBody>
 
