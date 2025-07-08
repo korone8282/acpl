@@ -61,7 +61,7 @@ const ContainerList = () => {
           getInfo();
           getData();
 
-    }, [userinfo.token]);
+    }, [userinfo.token,info]);
     
   return (
     <div>
