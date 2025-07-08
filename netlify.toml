@@ -1,25 +1,122 @@
-[build]
-  command = "npm run build"  # Builds your React app
-  publish = "build"          # Output directory for React build
-  functions = "functions"    # Directory for Netlify Functions
+# Netlify configuration file
 
-  [[redirects]]
+[build]
+  base = "."
+  command = "npm run build"
+  publish = "build"
+  functionsDirectory = "functions"
+
+[[redirects]]
   from = "/category"
   to = "/.netlify/functions/category"
   status = 200
 
-  [[redirects]]
-  from = "/category/:id"
-  to = "/.netlify/functions/category/:id"
+[[redirects]]
+  from = "/category/*"
+  to = "/.netlify/functions/category/:splat"
   status = 200
-  
-  [[redirects]]
+
+[[redirects]]
+  from = "/product"
+  to = "/.netlify/functions/product"
+  status = 200
+
+[[redirects]]
+  from = "/product/*"
+  to = "/.netlify/functions/product/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/goal"
+  to = "/.netlify/functions/goal"
+  status = 200
+
+[[redirects]]
+  from = "/goal/*"
+  to = "/.netlify/functions/goal/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/data"
+  to = "/.netlify/functions/data"
+  status = 200
+
+[[redirects]]
+  from = "/data/*"
+  to = "/.netlify/functions/data/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/graph"
+  to = "/.netlify/functions/graph"
+  status = 200
+
+[[redirects]]
+  from = "/graph/*"
+  to = "/.netlify/functions/graph/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/monthly-graph"
+  to = "/.netlify/functions/graph"
+  status = 200
+
+[[redirects]]
+  from = "/graph/:month"
+  to = "/.netlify/functions/graph/:month"
+  status = 200
+
+[[redirects]]
+  from = "/dispatch"
+  to = "/.netlify/functions/dispatch"
+  status = 200
+
+[[redirects]]
+  from = "/packed"
+  to = "/.netlify/functions/dispatch"
+  status = 200
+
+[[redirects]]
+  from = "/packed-report"
+  to = "/.netlify/functions/dispatch"
+  status = 200
+
+[[redirects]]
+  from = "/dispatched-report"
+  to = "/.netlify/functions/dispatch"
+  status = 200
+
+[[redirects]]
+  from = "/export"
+  to = "/.netlify/functions/export"
+  status = 200
+
+[[redirects]]
+  from = "/export/*"
+  to = "/.netlify/functions/export/:splat"
+  status = 200
+
+[[redirects]]
   from = "/products"
   to = "/.netlify/functions/product"
   status = 200
-  
- [[redirects]]
-  from = "/products/:id"
-  to = "/.netlify/functions/product/:id"
+
+[[redirects]]
+  from = "/updater-one"
+  to = "/.netlify/functions/product"
   status = 200
-  
+
+[[redirects]]
+  from = "/pouches/*"
+  to = "/.netlify/functions/product/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/disp-product/*"
+  to = "/.netlify/functions/product/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/goals/*"
+  to = "/.netlify/functions/goal/:splat"
+  status = 200
