@@ -80,13 +80,7 @@ const KvF = () => {
 
     })
   })
-
-  array = array.filter((value, index, self) =>
-    index !== self.findIndex((obj) => (
-      obj.product === value.product && obj.day === value.day
-    ))
-  )
-
+  
   function yo(val,ele){
 
     if (arr.length){
@@ -104,9 +98,9 @@ const KvF = () => {
 
   function size(val,ele){
 
-    if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
-      let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
-      return `${ele.packSize}, ${item.size}`
+    const matchedItems = array.filter(obj => obj.day === val.dayTime && obj.product === ele.productName);
+    if (matchedItems.length > 0) {
+      return matchedItems.map(item => item.size).join(', ');
     } else {
       return ele.packSize
     }
@@ -114,29 +108,31 @@ const KvF = () => {
 
   function count(val,ele){
 
-    if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
-      let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
-      return `${ele.pouchQuantity}, ${item.count}`
-    } else {
+    const matchedItems = array.filter(obj => obj.day === val.dayTime && obj.product === ele.productName);
+    if (matchedItems.length > 0) {
+      return matchedItems.map(item => item.count).join(', ');
+    }else {
       return ele.pouchQuantity
     }
   } 
 
   function quant(val,ele){
-
-    if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
-      let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
-      return ((ele.pouchQuantity*(ele.packSize+0.005))+(item.count*(item.size+0.005)))?.toFixed(2);
-    } else {
+  
+    const matchedItems = array.filter(obj => obj.day === val.dayTime && obj.product === ele.productName);
+    if (matchedItems.length > 0) {
+    return matchedItems.reduce((sum, item) => {
+      return sum + ((parseFloat(item.size) + 0.005) * parseFloat(item.count));
+    }, 0).toFixed(2);
+    }else {
       return ((ele.packSize+0.005)*ele.pouchQuantity)?.toFixed(2)
     }
   } 
 
   function waste(val,ele){
 
-    if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
-      let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
-      return (ele.filled+item.filled ? (ele.filled+item.filled).toFixed(2) : 0);
+    const matchedItems = array.filter(obj => obj.day === val.dayTime && obj.product === ele.productName);
+    if (matchedItems.length > 0) {
+    return matchedItems.reduce((sum, item) => sum + (item.filled ? parseFloat(item.filled) : 0), 0).toFixed(2);
     } else {
       return (ele.filled ? ele.filled.toFixed(2) : 0)
     }

@@ -137,7 +137,7 @@ const Filiing = () => {
                 <TableCell colSpan={6}>Total:</TableCell>
                 <TableCell>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0)}</TableCell>
                 <TableCell>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0)}</TableCell>
-                <TableCell>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0)}</TableCell>
+                <TableCell>{(sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0)).toFixed(2)}</TableCell>
                 <TableCell colSpan={2}></TableCell>
               </TableRow>
             </TableBody>
