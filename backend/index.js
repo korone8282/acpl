@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
 	cors({
-		origin: "https://acpl-2.onrender.com",
+		origin: "https://acpl1.netlify.app",
 		credentials: true,
 	})
 );
