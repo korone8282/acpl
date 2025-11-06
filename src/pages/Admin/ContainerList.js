@@ -16,7 +16,7 @@ const ContainerList = () => {
     const [array, setArray] = useState([]);
 
     const [info] = useState({
-      start:new Date(new Date().setDate(new Date().getDate() - 21)).toISOString().split('T')[0],
+      start:new Date(new Date().setDate(new Date().getDate() - 60)).toISOString().split('T')[0],
       end: new Date().toISOString().split('T')[0],
   });
 
