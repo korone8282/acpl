@@ -33,9 +33,9 @@ exports.createData = async (event) => {
 exports.readData = async (event) => {
   try {
     const { date, month } = event.pathParameters || {};
-    const start = new Date(`2025-${month}-${date}`);
+    const start = new Date(`2026-${month}-${date}`);
     start.setHours(0, 0, 0, 0);
-    const end = new Date(`2025-${month}-${date}`);
+    const end = new Date(`2026-${month}-${date}`);
     end.setHours(23, 59, 59, 999);
     const existData = await Data.find({ createdAt: { $gte: start, $lte: end } });
     if (!existData.length) {
@@ -100,9 +100,9 @@ exports.readMonthlyData = async (event) => {
   try {
     const { month } = event.pathParameters || {};
     const days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const startDate = new Date(`2025-${month}-01`);
+    const startDate = new Date(`2026-${month}-01`);
     startDate.setHours(0, 0, 0, 0);
-    const endDate = new Date(`2025-${month}-${days[month - 1]}`);
+    const endDate = new Date(`2026-${month}-${days[month - 1]}`);
     endDate.setHours(23, 59, 59, 999);
     const existData = await Data.find({ createdAt: { $gte: startDate, $lte: endDate } });
     if (!existData.length) {
