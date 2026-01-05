@@ -12,9 +12,9 @@ exports.readGraph = async(req,res) => {
  
         for(let i=1;i<32;i++){
 
-            const start = new Date(`2025-${month}-${i}`);
+            const start = new Date(`2026-${month}-${i}`);
             start.setHours(0, 0, 0, 0);
-            const end = new Date(`2025-${month}-${i}`);
+            const end = new Date(`2026-${month}-${i}`);
             end.setHours(23, 59, 59, 999);
 
             const existData = await Data.find({createdAt:{
@@ -56,9 +56,9 @@ exports.monthlyGraph = async(req,res) => {
 
                 for(let i=1;i<13;i++){
  
-                const startDate = new Date(`2025-${i}-01`);
+                const startDate = new Date(`2026-${i}-01`);
                 startDate.setHours(0, 0, 0, 0);
-                const endDate = new Date(`2025-${i}-${days[i-1]}`);
+                const endDate = new Date(`2026-${i}-${days[i-1]}`);
                 endDate.setHours(23, 59, 59, 999);
 
                 const existData = await Data.find({createdAt:{
