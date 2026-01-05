@@ -55,9 +55,9 @@ exports.readData = async(req,res) => {
     
         const {date,month} = req.params;
 
-        const start = new Date(`2025-${month}-${date}`);
+        const start = new Date(`2026-${month}-${date}`);
         start.setHours(0, 0, 0, 0);
-        const end = new Date(`2025-${month}-${date}`);
+        const end = new Date(`2026-${month}-${date}`);
         end.setHours(23, 59, 59, 999);
 
         const existData = await Data.find({createdAt:{
@@ -163,9 +163,9 @@ exports.readMonthlyData = async(req,res) => {
 
                 const {month} = req.params;
         
-                const startDate = new Date(`2025-${month}-01`);
+                const startDate = new Date(`2026-${month}-01`);
                 startDate.setHours(0, 0, 0, 0);
-                const endDate = new Date(`2025-${month}-${days[month-1]}`);
+                const endDate = new Date(`2026-${month}-${days[month-1]}`);
                 endDate.setHours(23, 59, 59, 999);
 
                 const existData = await Data.find({createdAt:{
