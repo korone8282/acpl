@@ -48,7 +48,7 @@ const Kitchen = () => {
 
 
         <div className="text-center">
-          <h2 className="text-xl font-semibold">Daily Log For {date.date}-{date.month}-2025</h2>
+          <h2 className="text-xl font-semibold">Daily Log For {date.date}-{date.month}-2026</h2>
         </div>
 
     <div className='flex justify-center gap-10'>
